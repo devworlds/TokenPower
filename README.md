@@ -21,6 +21,6 @@
 <h3>5. Caso não rode digite: "npx hardhat compile" e roda o passo 4 novamente.<h3>
  
 # EQUIPE:
-[Jefferson Luiz](https://github.com/devworlds)
-[Guilherme Boaventura](https://github.com/guilhermeboaventurarodrigues)
+[Jefferson Luiz](https://github.com/devworlds)<br>
+[Guilherme Boaventura](https://github.com/guilhermeboaventurarodrigues)<br>
 [Hugo Vinícius](https://github.com/Hiramek1)
