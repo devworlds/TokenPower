@@ -2,6 +2,8 @@ const { expect } = require("chai");
 const { ethers } = require("hardhat");
 const { it } = require("mocha");
 
+//testes unitários
+
 describe("isDeployed", () => {
     it("Should return contract address", async () => {
       const TokenFactory = await ethers.getContractFactory("TokenPower");
