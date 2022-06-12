@@ -83,7 +83,7 @@ describe("isDeployed", () => {
             const TokenDeploy = await TokenFactory.deploy(supply);
             await TokenDeploy.deployed();
     
-            expect(await TokenDeploy.getStatusTransfer()).to.equal("TRANSFER_ENABLED");
+            expect(await TokenDeploy.statusTransfer()).to.equal(true);
         })
 
         it("Should return the value that was send to new wallet with transfer enable", async () => {
@@ -96,7 +96,7 @@ describe("isDeployed", () => {
             const TokenDeploy = await TokenFactory.deploy(supply);
             await TokenDeploy.deployed();
 
-            expect(await TokenDeploy.getStatusTransfer()).to.equal("TRANSFER_ENABLED");
+            expect(await TokenDeploy.statusTransfer()).to.equal(true);
             await TokenDeploy.transfer(Wallet1.address, trade);
             expect(await TokenDeploy.balanceOf(Wallet1.address)).to.equal(trade);
             expect(await TokenDeploy.balanceOf(Owner.address)).to.equal(supply - trade);
@@ -109,9 +109,9 @@ describe("isDeployed", () => {
             const TokenDeploy = await TokenFactory.deploy(supply);
             await TokenDeploy.deployed();
 
-            await TokenDeploy.setTransferDisable();
+            await TokenDeploy.pausable();
 
-            expect(await TokenDeploy.getStatusTransfer()).to.equal("TRANSFER_DISABLED");
+            expect(await TokenDeploy.statusTransfer()).to.equal(false);
         })
 
         it("Should return exception by transfer disable", async () => {
@@ -125,9 +125,9 @@ describe("isDeployed", () => {
             const TokenDeploy = await TokenFactory.deploy(supply);
             await TokenDeploy.deployed();
 
-            await TokenDeploy.setTransferDisable();
+            await TokenDeploy.pausable();
 
-            expect(await TokenDeploy.getStatusTransfer()).to.equal("TRANSFER_DISABLED");
+            expect(await TokenDeploy.statusTransfer()).to.equal(false);
             await expect(TokenDeploy.transfer(Wallet1.address, trade)).to.be.revertedWith("Can't transfer, Transfer Status is Disabled!");
         })
 

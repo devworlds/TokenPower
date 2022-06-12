@@ -30,13 +30,13 @@ contract TokenPower is IERC20 {
     uint256 private totalsupply;
     uint256 private burnValue = 70;
     uint256 minSupplyToken;
-    Status statusTransfer;
+    bool public statusTransfer;
     address public owner;
     mapping(address => uint256) private addressToBalance;
 
 
     //enum
-    enum Status {TRANSFER_DISABLED, TRANSFER_ENBABLED}
+    //enum Status {TRANSFER_DISABLED, TRANSFER_ENBABLED}
 
     // Events
     //event Transfer(address sender, address receiver, uint256 amount);
@@ -46,7 +46,7 @@ contract TokenPower is IERC20 {
         totalsupply = total;
         minSupplyToken = totalsupply/3;
         addressToBalance[msg.sender] = totalsupply;
-        statusTransfer = Status.TRANSFER_ENBABLED;
+        statusTransfer = true;
     }
 
     //Public Functions
@@ -60,7 +60,7 @@ contract TokenPower is IERC20 {
 
     //FIX: Ta feio, podemos melhorar
     function transfer(address receiver, uint256 quantity) public override returns(bool) {
-        require(statusTransfer == Status.TRANSFER_ENBABLED, "Can't transfer, Transfer Status is Disabled!");
+        require(statusTransfer == true, "Can't transfer, Transfer Status is Disabled!");
         require(quantity <= addressToBalance[msg.sender], "Insufficient Balance to Transfer");
         addressToBalance[msg.sender] = addressToBalance[msg.sender] - quantity;
         addressToBalance[receiver] = addressToBalance[receiver] + quantity;
@@ -87,25 +87,7 @@ contract TokenPower is IERC20 {
        return totalToBurn;
     }
 
-    function setTransferEnable() public {
-        statusTransfer = Status.TRANSFER_ENBABLED;
-    }
-
-    function setTransferDisable() public{
-        statusTransfer = Status.TRANSFER_DISABLED;
-    }
-
-    function getStatusTransfer() public view returns(string memory Return){
-        
-
-        if(statusTransfer == Status.TRANSFER_DISABLED){
-            Return = "TRANSFER_DISABLED";
-            return Return;
-        }
-        if(statusTransfer == Status.TRANSFER_ENBABLED){
-            Return = "TRANSFER_ENABLED";
-            return Return;
-        }
-        
+    function pausable() public {
+        statusTransfer = !statusTransfer;
     }
 }
