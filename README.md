@@ -11,7 +11,7 @@
 <h3>- Função de Burn criada com o intuito de deflacionar o supply, a cada transação é descontado uma % definida pelo Owner como burn do supply.<h3>
 
 # PAUSABLE:
-<h3>- Pra essa funcionalidade criamos um Enum com (enable/disable), permitindo ou não o transfer do token.<h3>
+<h3>- Pra essa funcionalidade criamos um bool permitindo ou não o transfer do token.<h3>
  
 # INSTALAÇÃO DO PROJETO:
 <h3>1. Basta dar um clone no repositório.<h3>
